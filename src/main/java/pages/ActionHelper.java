@@ -7,11 +7,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class PageBase {
+public class ActionHelper {
     public static WebDriver driver;
 
     public void setDriver(WebDriver driver) {
-        PageBase.driver = driver;
+        ActionHelper.driver = driver;
     }
 
 

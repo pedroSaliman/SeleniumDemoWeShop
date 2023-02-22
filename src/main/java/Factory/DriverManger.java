@@ -1,5 +1,8 @@
 package Factory;
 
+import Factory.managers.ChromeManage;
+import Factory.managers.EdgManage;
+import Factory.managers.FireManage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.commons.io.FileUtils;
@@ -15,62 +18,73 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 import static Enum.BrowserTypes.CHROME;
 import static Enum.BrowserTypes.FIREFOX;
 import  Enum.BrowserTypes;
 public class DriverManger {
- public   static FrameWorkConfig config;
+
  public static   WebDriver driver;
 
-    public static WebDriver getDr() {
-        return dr.get();
+/*
+*       BEFORE FUNCTIONAL PROGRAMING
+*
+* */
+// public static   void init(BrowserTypes browser)
+// {
+//
+//switch (browser){
+//    case CHROME:
+//        driver= ChromeManage.getChrome();
+//        ThreadLocalDriver.setDriver(driver);
+//        ThreadLocalDriver.getDriver().get(ConfigClass.getConfig().url());
+//        ThreadLocalDriver.getDriver().manage().window().maximize();
+//        break;
+//    case FIREFOX:
+//        driver= FireManage.getFire();
+//        ThreadLocalDriver.setDriver(driver);
+//        ThreadLocalDriver.getDriver().get(ConfigClass.getConfig().url());
+//        ThreadLocalDriver.getDriver().manage().window().maximize();
+//        break;
+//    case EDGE:
+//        driver= EdgManage.getEdge();
+//        ThreadLocalDriver.setDriver(driver);
+//        ThreadLocalDriver.getDriver().get(ConfigClass.getConfig().url());
+//        ThreadLocalDriver.getDriver().manage().window().maximize();
+//    default:
+//        System.out.println("Please Enter the right browser name");
+//        break;
+//}}
+
+    /*
+    After
+    *
+    * */
+    private static final Map<BrowserTypes, Supplier<WebDriver>> MAP =
+            new EnumMap<>(BrowserTypes.class);
+
+    static {
+        MAP.put(BrowserTypes.CHROME, ChromeManage::getChrome);
+        MAP.put(BrowserTypes.FIREFOX, FireManage::getFire);
+        MAP.put(BrowserTypes.EDGE, EdgManage::getEdge);
     }
 
-    private static ThreadLocal<WebDriver> dr=new ThreadLocal<>();
- public static void setDriver(WebDriver driverr){
-     dr.set(driverr);
- }
-
- public static   void init(BrowserTypes browser)
- {
-config=ConfigFactory.create(FrameWorkConfig.class);
-switch (browser){
-    case CHROME:
-        driver=WebDriverManager.chromedriver().create();
-        driver=new ChromeDriver();
-        setDriver(driver);
-        getDr().get(config.url());
-        getDr().manage().window().maximize();
-        break;
-    case FIREFOX:
-        driver=WebDriverManager.firefoxdriver().create();
-        driver=new FirefoxDriver();
-        setDriver(driver);
-        getDr().get(config.url());
-        getDr().manage().window().maximize();
-        break;
-    case EDGE:
-        driver=WebDriverManager.edgedriver().create();
-        driver=new EdgeDriver();
-        setDriver(driver);
-        getDr().get(config.url());
-        getDr().manage().window().maximize();
-    default:
-        System.out.println("Please Enter the right browser name");
-        break;
-
-}
+    public static WebDriver getDriver(BrowserTypes browserType) {
+        return MAP.get(browserType).get();
+    }
 
 
+/*
+*
+*
+*
+*
+* */
 
 
-
- }
-
-public static void close(){
-     getDr().quit();
-}
 public static String Screen() throws IOException {
      File source= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
      String path="E:/seleniumprojects/gitendtoend/SeleniumEndToEnd/build/screenshots/image.png";

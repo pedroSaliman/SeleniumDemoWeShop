@@ -2,7 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 
-public class RegisterPage extends PageBase{
+public class RegisterPage extends ActionHelper {
 
     private static final By Gender= By.xpath("//input[@id='gender-male']");
     private static final By fName=By.xpath("//input[@id='FirstName']");

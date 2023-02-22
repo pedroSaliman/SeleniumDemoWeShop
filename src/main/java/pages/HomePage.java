@@ -2,7 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 
-public class HomePage extends PageBase{
+public class HomePage extends ActionHelper {
     private static final By RegisterButton=By.xpath("//a[normalize-space()='Register']");
     private static final By Searchbar=By.xpath("//input[@id='small-searchterms']");
     private static final By LoginButton=By.xpath("//a[normalize-space()='Log in']");

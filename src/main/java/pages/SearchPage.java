@@ -2,7 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 
-public class SearchPage extends PageBase{
+public class SearchPage extends ActionHelper {
     private static final By desktp=By.xpath("//a[normalize-space()='Build your own cheap computer']");
     private static final By usedphone=By.xpath("//a[normalize-space()='Used phone']");
     private static final  By elct=By.xpath("//li[@class='inactive']//a[normalize-space()='Electronics']");
