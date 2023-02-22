@@ -10,7 +10,7 @@ public class ApiReqres {
 private ApiReqres(){};
 
     public static Response getUsers(String List_Users_EndPoint){
-        return     BaseApiRequest.getDefaultRequest().queryParam("page",2)
+        return     BaseApiRequest.getDefaultRequest()
 
                 .get(List_Users_EndPoint);
     }
