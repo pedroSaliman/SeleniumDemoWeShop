@@ -1,6 +1,8 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 public class HomePage extends ActionHelper {
     private static final By RegisterButton=By.xpath("//a[normalize-space()='Register']");
@@ -16,20 +18,27 @@ public class HomePage extends ActionHelper {
 
     /////////////Register Click Button///////////////////
     public RegisterPage regClick(){
-        click(RegisterButton);
+        perform(RegisterButton, WebElement::isDisplayed,WebElement::click);
+      //  click(RegisterButton);
         return new RegisterPage();
     }
     //////////////Search///////
     public SearchPage clicksearch(String product){
-        type(Searchbar,product);
-        clickandpressenter(Searchbar);
+        perform(Searchbar,WebElement::isDisplayed,w->w.sendKeys(product));
+        perform(Searchbar,WebElement::isDisplayed,w->w.sendKeys(Keys.ENTER));
+
+       // type(Searchbar,product);
+        //clickandpressenter(Searchbar);
 
         return new SearchPage();
     }
     ///////////////////////////////////////////
     public Login LoginClick(){
-click(LogoutButton);
-        click(LoginButton);
+        perform(LogoutButton,WebElement::isDisplayed,WebElement::click);
+        perform(LoginButton,WebElement::isDisplayed,WebElement::click);
+
+//        click(LogoutButton);
+//        click(LoginButton);
 
         return new Login();
     }
