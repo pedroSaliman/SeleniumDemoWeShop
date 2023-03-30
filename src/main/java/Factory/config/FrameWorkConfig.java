@@ -1,4 +1,4 @@
-package Factory;
+package Factory.config;
 
 import org.aeonbits.owner.Config;
 

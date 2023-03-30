@@ -1,6 +1,5 @@
 package Api;
 
-import Factory.FrameWorkConfig;
 import org.aeonbits.owner.ConfigCache;
 
 public class ApiConfigClass {

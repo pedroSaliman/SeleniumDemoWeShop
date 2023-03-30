@@ -1,10 +1,14 @@
 package pages;
 
+import DataPojo.Data;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 public class HomePage extends ActionHelper {
+    public static HomePage getInstance(){
+        return new HomePage();
+    }
     private static final By RegisterButton=By.xpath("//a[normalize-space()='Register']");
     private static final By Searchbar=By.xpath("//input[@id='small-searchterms']");
     private static final By LoginButton=By.xpath("//a[normalize-space()='Log in']");
@@ -23,8 +27,8 @@ public class HomePage extends ActionHelper {
         return new RegisterPage();
     }
     //////////////Search///////
-    public SearchPage clicksearch(String product){
-        perform(Searchbar,WebElement::isDisplayed,w->w.sendKeys(product));
+    public SearchPage clicksearch(Data data){
+        perform(Searchbar,WebElement::isDisplayed,w->w.sendKeys(data.getProduct()));
         perform(Searchbar,WebElement::isDisplayed,w->w.sendKeys(Keys.ENTER));
 
        // type(Searchbar,product);

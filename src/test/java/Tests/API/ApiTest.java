@@ -1,4 +1,4 @@
-package Tests;
+package Tests.API;
 
 import Api.ApiConfigClass;
 import Api.ApiReqres;

@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class SearchPage extends ActionHelper {
+    public static SearchPage getInstance(){
+        return new SearchPage();
+    }
     private static final By desktp=By.xpath("//a[normalize-space()='Build your own cheap computer']");
     private static final By usedphone=By.xpath("//a[normalize-space()='Used phone']");
     private static final  By elct=By.xpath("//li[@class='inactive']//a[normalize-space()='Electronics']");

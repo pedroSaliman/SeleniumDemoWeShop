@@ -1,5 +1,6 @@
 package Factory;
 
+import Factory.config.ConfigClass;
 import org.openqa.selenium.WebDriver;
 import  Enum.BrowserTypes;
 

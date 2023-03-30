@@ -1,22 +1,21 @@
 package Tests;
 
-import Factory.ConfigClass;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
 public class TestCases extends BaseTest{
 
-
+//ConfigClass.getConfig().FirstName(),ConfigClass.getConfig().LastName(),  ConfigClass.getConfig().password(),ConfigClass.getConfig().confirm()
     @Test
     public void Register(){
-        new HomePage().regClick().RegisterProcess(ConfigClass.getConfig().FirstName(),ConfigClass.getConfig().LastName(),  email,ConfigClass.getConfig().password(),ConfigClass.getConfig().confirm());
+        HomePage.getInstance().regClick().RegisterProcess(employee);
         Assert.assertTrue(new MyAccountPage().message().contains("complete"));
     }
     ///////////////////////////////////////////////////////////////////
     @Test(dependsOnMethods = {"Register"})
     public void Log(){
-        new HomePage().LoginClick().LogIn(email, ConfigClass.getConfig().password());
+         HomePage.getInstance().LoginClick().LogIn(employee);
         Assert.assertEquals(new HomePage().Text(),"Log out");
 
     }
@@ -30,7 +29,7 @@ public class TestCases extends BaseTest{
 
     @Test(dependsOnMethods = {"Log"})
     public void Search(){
-        new HomePage().clicksearch(ConfigClass.getConfig().product()).clicktoproductpage();
+        HomePage.getInstance().clicksearch(employee).clicktoproductpage();
         Assert.assertTrue(new ProductPage().message().contains("Build"));
     }
 
@@ -44,9 +43,9 @@ public class TestCases extends BaseTest{
 
     @Test(dependsOnMethods = {"Search"})
     public void CompareCase(){
-       new ProductPage().CompareProduct();
-        new SearchPage().clickasus();
-        new ProductPage().CompareProduct().RemoveProduct();
+       ProductPage.getInstance().CompareProduct();
+         SearchPage.getInstance().clickasus();
+        ProductPage.getInstance().CompareProduct().RemoveProduct();
         Assert.assertTrue(new ComparePage().Text().contains("items"));
 
 
