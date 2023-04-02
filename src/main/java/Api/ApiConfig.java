@@ -19,4 +19,6 @@ public interface ApiConfig extends Config {
 
     @Key("single.resources")
     String SingleResources();
+    @Key("auth")
+    String AuthBasic();
 }

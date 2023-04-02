@@ -1,6 +1,5 @@
 package Api;
 
 public enum HttpMethods {
-    GET,
-        POST
+    GET, POST,DELETE,PUT
 }
