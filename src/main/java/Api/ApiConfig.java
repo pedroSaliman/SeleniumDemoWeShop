@@ -21,4 +21,9 @@ public interface ApiConfig extends Config {
     String SingleResources();
     @Key("auth")
     String AuthBasic();
+    String instantapiurlpost();
+    @Key("instant.post")
+    String postInstant();
+    @Key("instant.users")
+    String instantUser();
 }

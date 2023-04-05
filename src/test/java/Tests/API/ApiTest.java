@@ -2,6 +2,7 @@ package Tests.API;
 
 import Api.ApiConfigClass;
 import Api.ApiReqres;
+import Api.BaseApiRequest;
 import Api.MapBody;
 import io.restassured.response.Response;
 import org.assertj.core.api.Assertions;
@@ -14,14 +15,14 @@ public class ApiTest {
 
     @Test
     public void getListUsers(){
-        Response res= ApiReqres.getUsers(ApiConfigClass.getConfig().ListUsersEndPoint());
+        Response res= ApiReqres.getUsers(BaseApiRequest.Base_Url,ApiConfigClass.getConfig().ListUsersEndPoint());
         Assertions.assertThat(res.statusCode()).isEqualTo(200);
     }
 
 
     @Test
     public void getSingleUser(){
-        Response res= ApiReqres.getUsers(ApiConfigClass.getConfig().SingleUser());
+        Response res= ApiReqres.getUsers(BaseApiRequest.Base_Url,ApiConfigClass.getConfig().SingleUser());
         Assertions.assertThat(res.statusCode()).isEqualTo(200);
         Assertions.assertThat(res.body().jsonPath().get("data.last_name").equals("Weaver"))
                 .isNotNull()
@@ -31,7 +32,7 @@ public class ApiTest {
 
     @Test
     public void getSingleUserNotFound(){
-        Response res= ApiReqres.getUsers(ApiConfigClass.getConfig().SingleUserNotFound());
+        Response res= ApiReqres.getUsers(BaseApiRequest.Base_Url,ApiConfigClass.getConfig().SingleUserNotFound());
         Assertions.assertThat(res.statusCode()).isEqualTo(404);
 
 
@@ -39,7 +40,7 @@ public class ApiTest {
 
     @Test
     public void getSingleResources(){
-        Response res= ApiReqres.getUsers(ApiConfigClass.getConfig().SingleResources());
+        Response res= ApiReqres.getUsers(BaseApiRequest.Base_Url,ApiConfigClass.getConfig().SingleResources());
         Assertions.assertThat(res.statusCode()).isEqualTo(200);
         Assertions.assertThat(res.body().jsonPath().get("data.name").equals("fuchsia rose"));
 

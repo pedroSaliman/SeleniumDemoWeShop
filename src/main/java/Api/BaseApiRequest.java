@@ -10,13 +10,16 @@ public class BaseApiRequest {
     public final static String Base_Url_User= ApiConfigClass.getConfig().SingleUser();
     public final static String Base_UrlSingleUserNotFound= ApiConfigClass.getConfig().SingleUserNotFound();
     public final static String Base_Auth= ApiConfigClass.getConfig().AuthBasic();
+    public final static String Base_instant= ApiConfigClass.getConfig().instantapiurlpost();
+    public final static String Base_instantPost= ApiConfigClass.getConfig().postInstant();
+    public final static String Get_Instant_User= ApiConfigClass.getConfig().instantUser();
 
 
 
 
 
-    public static RequestSpecification getDefaultRequest(){
+    public static RequestSpecification getDefaultRequest(String URL){
 
-        return     RestAssured.given().baseUri(Base_Url).log().all();
+        return     RestAssured.given().baseUri(URL).log().all();
     }
 }
